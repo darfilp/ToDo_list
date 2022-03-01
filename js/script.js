@@ -37,7 +37,8 @@ const render = function () {
         render()
       });
   });
-  
+
+  localStorage.setItem('to-do', JSON.stringify(toDoData) );
 };
 
 todoControl.addEventListener("submit", function (event) {
@@ -48,7 +49,7 @@ todoControl.addEventListener("submit", function (event) {
   if (headerInput.value.trim() === "") {
     alert("Введите что-либо");
     render();
-    return;
+    return
   }
 
   const newTodo = {
@@ -56,20 +57,12 @@ todoControl.addEventListener("submit", function (event) {
     completed: false,
   };
     toDoData.push(newTodo);
-localStorage.setItem("toDoData", JSON.stringify(toDoData))
-  headerInput.value = "";
 
   render();
 });
 
-if (toDoData = JSON.parse(localStorage.getItem("toDoData"))) {
-    render()
-    localStorage.clear()
-} else {
-    toDoData = [] 
+if (JSON.parse(localStorage.getItem('to-do'))) {
+  const lc = JSON.parse(localStorage.getItem('to-do'))
+  toDoData = lc;
+  render();
 }
-
-console.log("[todoCompleted]", todoCompleted);
-console.log("[headerInput]", headerInput);
-console.log("[todoControl]", todoControl);
-console.log("[todoList]", todoList);
